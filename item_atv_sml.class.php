@@ -13,20 +13,12 @@ class Item {
         $this->seguencia_ias = $seguencia_ias;
     }
     
-
-    function getNome_ias() {
-        return $this->nome_ias;
+    public function __set($atrib, $value){
+        $this->$atrib = $value;
+    }
+    
+    public function __get(atrib){
+        return $this->$atrib;
     }
 
-    function getSeguencia_ias() {
-        return $this->seguencia_ias;
-    }
-
-    function setNome_ias($nome_ias) {
-        $this->nome_ias = $nome_ias;
-    }
-
-    function setSeguencia_ias($seguencia_ias) {
-        $this->seguencia_ias = $seguencia_ias;
-    }
 }
