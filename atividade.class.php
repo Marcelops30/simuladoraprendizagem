@@ -18,43 +18,11 @@ class Atividade {
         $this->imagem_asm = $imagem_asm;
     }
     
-    function getId_asm() {
-        return $this->id_asm;
+   public function __set($atrib, $value){
+        $this->$atrib = $value;
     }
-
-    function getNome_asm() {
-        return $this->nome_asm;
-    }
-
-    function getTempo_asm() {
-        return $this->tempo_asm;
-    }
-
-    function getPontuacao_asm() {
-        return $this->pontuacao_asm;
-    }
-
-    function getImagem_asm() {
-        return $this->imagem_asm;
-    }
-
-    function setId_asm($id_asm) {
-        $this->id_asm = $id_asm;
-    }
-
-    function setNome_asm($nome_asm) {
-        $this->nome_asm = $nome_asm;
-    }
-
-    function setTempo_asm($tempo_asm) {
-        $this->tempo_asm = $tempo_asm;
-    }
-
-    function setPontuacao_asm($pontuacao_asm) {
-        $this->pontuacao_asm = $pontuacao_asm;
-    }
-
-    function setImagem_asm($imagem_asm) {
-        $this->imagem_asm = $imagem_asm;
+    
+    public function __get(atrib){
+        return $this->$atrib;
     }
 }
