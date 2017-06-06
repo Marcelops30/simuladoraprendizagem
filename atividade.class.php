@@ -12,7 +12,10 @@ public class Atividade {
     private $imagem_asm;
     
     public function __construct(){
-    
+        $this->nome_asm = "";
+        $this->tempo_asm = "";
+        $this->pontuacao_asm = "";
+        $this->imagem_asm = "";
     }
     
     public function __construct($nome_asm, $tempo_asm, $pontuacao_asm, $imagem_asm){
