@@ -8,6 +8,11 @@ class Item {
     private $nome_ias;
     private $seguencia_ias;
     
+    function __construct(){
+        $this->nome_ias = "";
+        $this->seguencia_ias = "";
+    }
+    
     function __construct( $nome_ias, $seguencia_ias){
         $this->nome_ias = $nome_ias;
         $this->seguencia_ias = $seguencia_ias;
