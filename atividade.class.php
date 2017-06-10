@@ -11,6 +11,7 @@ public class Atividade {
     private $pontuacao_asm;
     private $imagem_asm;
     
+    //flgfjlkfjklf
     public function __construct(){
         $this->nome_asm = "";
         $this->tempo_asm = "";
