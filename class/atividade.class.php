@@ -1,73 +1,75 @@
 <?php
-
 /**
  * Description of Atividade.class.php
  *
  * @author MARCELO
  */
 class Atividade {
-    private $id_asm;
-    private $nome_asm;
-    private $tempo_asm;
-    private $pontuacao_asm;
-    private $imagem_asm;
-    
- /*  function __construct(){
-        $this->id_asm = "";
-        $this->nome_asm = "";
-        $this->tempo_asm = "";
-        $this->pontuacao_asm = "";
-        $this->imagem_asm = "";
-    }*/
-           
-    function __construct($id_asm, $nome_asm, $tempo_asm, $pontuacao_asm, $imagem_asm) {
-        $this->id_asm = $id_asm;
-        $this->nome_asm = $nome_asm;
-        $this->tempo_asm = $tempo_asm;
-        $this->pontuacao_asm = $pontuacao_asm;
-        $this->imagem_asm = $imagem_asm;
+    protected $tabela = 'tbl_atividade';
+    private $nome;
+    private $tempo;
+    private $pontuacao;
+    private $imagem;
+        
+    function __construct( $nome, $tempo, $pontuacao, $imagem) {
+        $this->nome = $nome;
+        $this->tempo = $tempo;
+        $this->pontuacao = $pontuacao;
+        $this->imagem = $imagem;
     }
     
-    function getId_asm() {
-        return $this->id_asm;
+    public function __set($atrib, $value) {
+        $this->$atrib = $value;
     }
-
-    function getNome_asm() {
-        return $this->nome_asm;
+    
+    public function __get($atrib) {
+        return $this->$atrib ;
     }
-
-    function getTempo_asm() {
-        return $this->tempo_asm;
+    
+    public function insert(){
+        $sql = "INSERT INTO $this->tabela (nome_asm, tempo_asm, pontuacao_asm, imagem_asm)"
+                . "VALUES (:nome, :tempo, :pontuacao, :imagem)";
+        
+        $stmt = DB::prepare ($sql);
+        $stmt->bindParam (':nome', $this->nome);
+        $stmt->bindParam (':tempo', $this->tempo);
+        $stmt->bindParam (':pontuacao', $this->pontuacao);
+        $stmt->bindParam (':imagem', $this->imagem);
+        return $stmt->execute();
     }
-
-    function getPontuacao_asm() {
-        return $this->pontuacao_asm;
+    
+    public function update($id){
+        $sql = "UPDATE $this->tabela SET nome_asm = :nome,
+                                         tempo_asm = :tempo,
+                                         pontuacao_asm = :pontuacao,
+                                         imagem_asm = :imagem
+                                         WHERE $this->id =:id";
+        $stmt = DB::prepare ($sql);
+        $stmt->bindParam (':nome', $this->nome);
+        $stmt->bindParam (':tempo', $this->tempo);
+        $stmt->bindParam (':pontuacao', $this->pontuacao);
+        $stmt->bindParam (':imagem', $this->imagem);
+        $stmt->bindParam (':id', $id);
+        return $stmt->execute();
     }
-
-    function getImagem_asm() {
-        return $this->imagem_asm;
-    }
-
-    function setId_asm($id_asm) {
-        $this->id_asm = $id_asm;
-    }
-
-    function setNome_asm($nome_asm) {
-        $this->nome_asm = $nome_asm;
-    }
-
-    function setTempo_asm($tempo_asm) {
-        $this->tempo_asm = $tempo_asm;
-    }
-
-    function setPontuacao_asm($pontuacao_asm) {
-        $this->pontuacao_asm = $pontuacao_asm;
-    }
-
-    function setImagem_asm($imagem_asm) {
-        $this->imagem_asm = $imagem_asm;
-    }
-
-
-
+    
+   public function findUnit($id){ // Procurar
+		$sql = "SELECT * FROM $this->tabela WHERE $this->id = :id";
+		$stmt = DB::prepare ( $sql );
+		$stmt->bindParam ( ':id', $id, PDO::PARAM_INT );
+		$stmt->execute ();
+		return $stmt->fetch ();
+	}
+	public function findAll(){ //listar
+		$sql = "SELECT * FROM $this->tabela";
+		$stmt = DB::prepare ( $sql );
+		$stmt->execute ();
+		return $stmt->fetchAll ();
+	}
+	public function deletar($id) {
+		$sql = "DELETE FROM $this->tabela WHERE $this->id = :id";
+		$stmt = DB::prepare ( $sql );
+		$stmt->bindParam ( ':id', $id, PDO::PARAM_INT );
+		return $stmt->execute ();
+	}
 }
