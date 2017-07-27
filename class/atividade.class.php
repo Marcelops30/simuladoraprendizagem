@@ -26,8 +26,8 @@ class Atividade {
         return $this->$atrib ;
     }
     
-    public function insert(){
-        $sql = "INSERT INTO $this->tabela (nome_asm, tempo_asm, pontuacao_asm, imagem_asm)"
+    public function adicionar(){
+        $sql = "INSERT INTO $this->table (nome_asm, tempo_asm, pontuacao_asm, imagem_asm)"
                 . "VALUES (:nome, :tempo, :pontuacao, :imagem)";
         
         $stmt = DB::prepare ($sql);
@@ -38,8 +38,8 @@ class Atividade {
         return $stmt->execute();
     }
     
-    public function update($id){
-        $sql = "UPDATE $this->tabela SET nome_asm = :nome,
+    public function atualizar($id) {
+        $sql = "UPDATE $this->table SET nome_asm = :nome,
                                          tempo_asm = :tempo,
                                          pontuacao_asm = :pontuacao,
                                          imagem_asm = :imagem
@@ -53,21 +53,21 @@ class Atividade {
         return $stmt->execute();
     }
     
-   public function findUnit($id){ // Procurar
-		$sql = "SELECT * FROM $this->tabela WHERE $this->id = :id";
+   public function procurar($id){ // Procurar
+		$sql = "SELECT * FROM $this->table WHERE $this->id = :id";
 		$stmt = DB::prepare ( $sql );
 		$stmt->bindParam ( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute ();
 		return $stmt->fetch ();
 	}
-	public function findAll(){ //listar
-		$sql = "SELECT * FROM $this->tabela";
+	public function listar(){ //listar
+		$sql = "SELECT * FROM $this->table";
 		$stmt = DB::prepare ( $sql );
 		$stmt->execute ();
 		return $stmt->fetchAll ();
 	}
 	public function deletar($id) {
-		$sql = "DELETE FROM $this->tabela WHERE $this->id = :id";
+		$sql = "DELETE FROM $this->table WHERE $this->id = :id";
 		$stmt = DB::prepare ( $sql );
 		$stmt->bindParam ( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute ();

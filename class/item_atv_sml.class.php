@@ -23,7 +23,7 @@ class Item {
 	}
 	
         public function adicionar(){
-        $sql = "INSERT INTO $this->tabela (nome_ias, seguencia_ias)"
+        $sql = "INSERT INTO $this->table (nome_ias, seguencia_ias)"
                 . "VALUES (:nome, :seguencia)";
         
         $stmt = DB::prepare ($sql);
@@ -33,7 +33,7 @@ class Item {
     }
     
     public function atualizar($id){
-        $sql = "UPDATE $this->tabela SET nome_ias = :nome,
+        $sql = "UPDATE $this->table SET nome_ias = :nome,
                                          seguencia_ias = :seguencia
                                          WHERE $this->id =:id";
         $stmt = DB::prepare ($sql);
@@ -43,21 +43,21 @@ class Item {
         return $stmt->execute();
     }
     
-   public function findUnit($id){ // Procurar
-		$sql = "SELECT * FROM $this->tabela WHERE $this->id = :id";
+   public function procurar($id){ // Procurar
+		$sql = "SELECT * FROM $this->table WHERE $this->id = :id";
 		$stmt = DB::prepare ( $sql );
 		$stmt->bindParam ( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute ();
 		return $stmt->fetch ();
 	}
-	public function findAll(){ // Listar
-		$sql = "SELECT * FROM $this->tabela";
+	public function listar(){ // Listar
+		$sql = "SELECT * FROM $this->table";
 		$stmt = DB::prepare ( $sql );
 		$stmt->execute ();
 		return $stmt->fetchAll ();
 	}
 	public function deletar($id) {
-		$sql = "DELETE FROM $this->tabela WHERE $this->id = :id";
+		$sql = "DELETE FROM $this->table WHERE $this->id = :id";
 		$stmt = DB::prepare ( $sql );
 		$stmt->bindParam ( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute ();
