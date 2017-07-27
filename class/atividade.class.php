@@ -60,7 +60,7 @@ class Atividade {
 		$stmt->execute ();
 		return $stmt->fetch ();
 	}
-	public function listar(){ //listar
+	public function listarTodos(){ //listar
 		$sql = "SELECT * FROM $this->table";
 		$stmt = DB::prepare ( $sql );
 		$stmt->execute ();

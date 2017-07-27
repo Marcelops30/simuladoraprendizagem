@@ -50,7 +50,7 @@ class Item {
 		$stmt->execute ();
 		return $stmt->fetch ();
 	}
-	public function listar(){ // Listar
+	public function listarTodos(){ // Listar
 		$sql = "SELECT * FROM $this->table";
 		$stmt = DB::prepare ( $sql );
 		$stmt->execute ();
